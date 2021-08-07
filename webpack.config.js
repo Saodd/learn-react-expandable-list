@@ -6,6 +6,9 @@ threadLoader.warmup(
     {},
     [
         'babel-loader',
+        "style-loader",
+        "css-loader",
+        "sass-loader",
     ]
 );
 
@@ -13,6 +16,7 @@ module.exports = {
     entry: {
         index: './src/index.tsx',
     },
+    target: ['web', 'es5'],
     output: {
         filename: '[name].[contenthash].js',
         path: path.resolve(__dirname, 'dist'),
@@ -28,12 +32,19 @@ module.exports = {
     // devtool: "inline-source-map",
     module: {
         rules: [
-            // {
-            //     test: /\.css$/,
-            //     use: ['style-loader', 'css-loader']
-            // },
+            {
+                test: /\.s[ac]ss$/i,
+                include: path.resolve('src'),
+                use: [
+                    'thread-loader',
+                    "style-loader",
+                    {loader: "css-loader", options: {modules: true}},
+                    "sass-loader",
+                ],
+            },
             {
                 test: /\.(png|svg|jpg|jpeg|gif)$/i,
+                include: path.resolve('src'),
                 type: "asset/resource",
             },
             {
