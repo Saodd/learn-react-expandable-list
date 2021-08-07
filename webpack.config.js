@@ -1,5 +1,13 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const threadLoader = require('thread-loader');
+
+threadLoader.warmup(
+    {},
+    [
+        'babel-loader',
+    ]
+);
 
 module.exports = {
     entry: {
@@ -14,25 +22,30 @@ module.exports = {
         new HtmlWebpackPlugin({
             title: "Learn React: Expandable List - Lewin",
             template: "./src/index.html"
-        })
+        }),
     ],
     mode: "production",
     // devtool: "inline-source-map",
     module: {
         rules: [
-            {
-                test: /\.css$/,
-                use: ['style-loader', 'css-loader']
-            },
+            // {
+            //     test: /\.css$/,
+            //     use: ['style-loader', 'css-loader']
+            // },
             {
                 test: /\.(png|svg|jpg|jpeg|gif)$/i,
                 type: "asset/resource",
             },
             {
                 test: /\.(js|jsx|ts|tsx)$/,
-                exclude: /(node_modules|bower_components)/,
-                loader: "babel-loader",
-                options: {presets: ["@babel/env", "@babel/preset-react", "@babel/preset-typescript"]}
+                include: path.resolve('src'),
+                use: [
+                    'thread-loader',
+                    {
+                        loader: "babel-loader",
+                        options: {presets: ["@babel/env", "@babel/preset-react", "@babel/preset-typescript"]}
+                    }
+                ],
             },
         ]
     },
@@ -51,7 +64,12 @@ module.exports = {
         },
     },
     performance: {
-        maxEntrypointSize: 1024*1024,
-        maxAssetSize: 1021*1024,
+        maxEntrypointSize: 1024 * 1024,
+        maxAssetSize: 1021 * 1024,
+    },
+    externals: {
+        "axios": "axios",
+        "react": "React",
+        "react-dom": "ReactDOM",
     }
 };
