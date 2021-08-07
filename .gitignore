@@ -1,4 +1,9 @@
-node_modules
-dist
+# Node.js
+node_modules/
 
-.idea
+# build
+dist/
+
+# IDEs
+.idea/
+.vscode/
