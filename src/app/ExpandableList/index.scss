@@ -1,5 +1,6 @@
 .root {
   padding-left: 24px;
+  position: relative;
 }
 
 .parent {
@@ -29,6 +30,52 @@
 
 .children {
   transition: height .5s;
-  overflow: hidden;
 }
 
+
+.prefix {
+  position: absolute;
+  background-image: url("https://img.alicdn.com/tfs/TB1wZpDnBTH8KJjy0FiXXcRsXXa-296-296.png");
+  background-size: 148px 148px;
+  width: 24px;
+  height: 24px;
+  left: 0;
+
+  &.branch {
+    z-index: 5;
+  }
+
+  &.branch0 {
+    display: none;
+  }
+
+  &.branch1 { // 三叉
+    background-position: -8px -35px;
+  }
+
+  &.branch2 { // 折（末尾）
+    background-position: -8px -59px;
+  }
+
+  &.branch3 { // 竖
+    background-position: -8px -47px;
+    width: 12.6px !important;
+  }
+
+  &.switch {
+    z-index: 10;
+    cursor: pointer;
+  }
+
+  &.switch0 {
+    display: none;
+  }
+
+  &.switch1 { // 一个加号
+    background-position: -55px -107px;
+  }
+
+  &.switch2 { // 一个减号
+    background-position: -97px -107px;
+  }
+}
