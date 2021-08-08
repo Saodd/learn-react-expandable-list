@@ -1,6 +1,5 @@
 import { GetSomeCategoryResponse } from './category';
 
-
 export const MockGet = {
   '/some/category': getSomeCategory,
 };

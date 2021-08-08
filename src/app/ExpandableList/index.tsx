@@ -19,7 +19,7 @@ interface ExpandableListProps<T> {
   isLast?: boolean;
 }
 
-export function ExpandableList<T>(props: ExpandableListProps<T>) {
+export function ExpandableList<T>(props: ExpandableListProps<T>): JSX.Element {
   const { root, render, selectedId, setSelectedId, depth = 0, isLast } = props;
   const [expand, setExpand] = React.useState<boolean>(!!root.defaultExpand);
   const handleExpand = React.useCallback(() => {
@@ -49,7 +49,11 @@ export function ExpandableList<T>(props: ExpandableListProps<T>) {
       <div className={switchStyles} onClick={handleExpand} />
       <div className={branchStyles} />
       {branchLines.map((n) => (
-        <div className={classNames(styles.prefix, styles.branch, styles.branch3)} style={{ left: -n * 24 + 'px' }} />
+        <div
+          className={classNames(styles.prefix, styles.branch, styles.branch3)}
+          style={{ left: -n * 24 + 'px' }}
+          key={n}
+        />
       ))}
       <div onClick={handleClick} className={classNames(styles.parent, selectedId === root.id && styles.selected)}>
         {render ? render(root) : <span>{root.id}</span>}

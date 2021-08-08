@@ -1,18 +1,16 @@
 import * as request from './request';
 
-
 export interface SomeCategory {
-  id: string,
-  parentId: string,
-  title: string,
+  id: string;
+  parentId: string;
+  title: string;
 }
 
-export interface GetSomeCategoryRequest {
-}
+export type GetSomeCategoryRequest = Record<string, never>;
 
 export interface GetSomeCategoryResponse {
   data: {
-    cats: SomeCategory[]
+    cats: SomeCategory[];
   };
 }
 
